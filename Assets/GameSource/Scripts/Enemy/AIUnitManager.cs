@@ -15,9 +15,9 @@ public class AIUnitManager : Manager
     {
         for (int i = 0; i < amount; i++)
         {
-            SoldierEnemy soldierEnemy =
-                GenericPoolSingleton.Instance.GetFromPool<SoldierEnemy>(Random.Range(c_soldierEnemyPoolIndex,
-                    c_patrolEnemyPoolIndex + 1));
+            AIEnemy soldierEnemy =
+                GenericPoolSingleton.Instance.GetFromPool<AIEnemy>(Random.Range(c_soldierEnemyPoolIndex,
+                    c_patrolEnemyPoolIndex+1));
             soldierEnemy.Initialize();
         }
     }

@@ -23,6 +23,7 @@ public class CameraFollower : MonoBehaviour
             tPos.z = 0;
 
         tPos += offset;
-        transform.position = Vector3.MoveTowards(transform.position, tPos, speed );
+        transform.position = Vector3.MoveTowards(transform.position, tPos, speed);
+        transform.LookAt(target);
     }
 }

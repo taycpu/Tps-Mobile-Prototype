@@ -7,6 +7,9 @@ public class GunAttributes : ScriptableObject
     public int Damage => damage;
     public int ShootForce => shootForce;
     public float LifeTime => lifeTime;
+    public bool IsAutomatic => isAutomatic;
+    [SerializeField] private bool isAutomatic;
+
     [SerializeField] private float cooldown;
     [SerializeField] private int shootForce;
     [SerializeField] private int damage;

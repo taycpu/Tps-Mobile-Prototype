@@ -24,19 +24,19 @@ public class AgentPointController : MonoBehaviour
 
     public AgentPoint GetNewTarget(Guid id)
     {
-        int rr = Random.Range(0, agentPoints.Count);
-        var obj = agentPoints[rr];
+        int oldPoint = Random.Range(0, agentPoints.Count);
+        var obj = agentPoints[oldPoint];
 
         if (obj.registeredBots.Contains(id))
         {
             obj.registeredBots.Remove(id);
-            int xx = Random.Range(0, agentPoints.Count);
-            while (xx == rr)
+            int randPoint = Random.Range(0, agentPoints.Count);
+            while (randPoint == oldPoint)
             {
-                xx = Random.Range(0, agentPoints.Count);
+                randPoint = Random.Range(0, agentPoints.Count);
             }
 
-            obj = agentPoints[xx];
+            obj = agentPoints[randPoint];
         }
 
 

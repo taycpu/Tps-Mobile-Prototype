@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   cooldown: 0.4
-  shootForce: 8
+  shootForce: 6
+  damage: 20
+  lifeTime: 0.5

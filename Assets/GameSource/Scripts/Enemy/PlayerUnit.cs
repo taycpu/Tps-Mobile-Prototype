@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerUnit : Unit
 {
-    [SerializeField] private GunController gunController;
+    [SerializeField] private PlayerGunController gunController;
     [SerializeField] private MovementController movementController;
 
     private bool isShootingStart;
@@ -15,18 +15,6 @@ public class PlayerUnit : Unit
         movementController.SetSpeed(unitAttributes.Speed);
     }
 
-    private void Update()
-    {
-        if (isShootingStart)
-        {
-            gunController.ShootDirect();
-        }
-    }
-
-    public void StartShooting()
-    {
-        isShootingStart = true;
-    }
 
     public void ShootCall()
     {
@@ -36,8 +24,8 @@ public class PlayerUnit : Unit
         }
     }
 
-    public void StopShooting()
+    public void ShootRelease()
     {
-        isShootingStart = false;
+        gunController.Release();
     }
 }

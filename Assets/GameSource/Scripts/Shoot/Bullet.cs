@@ -40,11 +40,11 @@ public class Bullet : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<SoldierEnemy>() != null)
+        if (other.gameObject.GetComponent<Unit>() != null)
         {
-            other.gameObject.GetComponent<SoldierEnemy>().TakeDamage(damage);
+            other.gameObject.GetComponent<Unit>().TakeDamage(damage);
         }
     }
 }

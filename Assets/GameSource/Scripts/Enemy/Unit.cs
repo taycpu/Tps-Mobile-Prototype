@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     public bool isAvailable;
+    [SerializeField] private HealthUI healthUI;
     [SerializeField] protected UnitAttributes unitAttributes;
     private int health;
 
@@ -17,9 +18,9 @@ public abstract class Unit : MonoBehaviour
         if (!isAvailable) return;
         health -= damage;
         TWEAKS.PlayParticle(1, transform.position);
+        healthUI.FillImage((float)health / (float)unitAttributes.Health);
         //Particles,Anims
         if (health <= 0)
-
             Die();
     }
 
@@ -27,5 +28,6 @@ public abstract class Unit : MonoBehaviour
     {
         isAvailable = false;
         TWEAKS.PlayParticle(0, transform.position);
+        gameObject.SetActive(false);
     }
 }

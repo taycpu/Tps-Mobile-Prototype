@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee42eb3f41bb4169b600376083bf664c, type: 3}
   m_Name: Smg
   m_EditorClassIdentifier: 
+  isAutomatic: 1
   cooldown: 0.3
   shootForce: 7
+  damage: 15
+  lifeTime: 0.4

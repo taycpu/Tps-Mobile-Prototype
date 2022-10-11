@@ -48,8 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7979267576631922191}
-  bulletSpeed: 5
-  damage: 25
 --- !u!54 &7979267576631922191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89,6 +87,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d3825338532cad047a1113fd86003c76, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3825338532cad047a1113fd86003c76, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3825338532cad047a1113fd86003c76, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3825338532cad047a1113fd86003c76, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3825338532cad047a1113fd86003c76, type: 3}
       propertyPath: m_LocalPosition.x
