@@ -2,128 +2,129 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[Serializable]
-public class PoolPiece
+namespace GameSource.Scripts.Pool
 {
-    public List<Component> pool = new List<Component>();
-
-    public Component this[int i]
+    [Serializable]
+    public class PoolPiece
     {
-        get { return pool[i]; }
-        set { pool[i] = value; }
-    }
-}
+        public List<Component> pool = new List<Component>();
 
-public class GenericPool : MonoBehaviour
-{
-    public List<PoolPiece> Pools => pools;
-    public List<PoolPiece> pools;
-    [HideInInspector] public int[] indices;
-    public string[][] names;
-
-
-    public T GetFromPool<T>(int poolIndex) where T : Component
-    {
-        int i = 0;
-        while (pools[poolIndex][i].gameObject.activeInHierarchy)
+        public Component this[int i]
         {
-            i++;
-            if (i > pools[poolIndex].pool.Count - 1)
-            {
-                var newClone = Instantiate(pools[poolIndex][0], Vector3.zero, Quaternion.identity,
-                    pools[poolIndex][0].transform.parent);
-                newClone.gameObject.SetActive(false);
-                pools[poolIndex].pool.Add(newClone);
-            }
+            get { return pool[i]; }
+            set { pool[i] = value; }
         }
-
-        return pools[poolIndex][i] as T;
     }
 
-
-    public T GetRandomObject<T>() where T : MonoBehaviour
+    public class GenericPool : MonoBehaviour
     {
-        int randPoolsIndex = Random.Range(0, pools.Count);
-        int randPoolIndex = Random.Range(0, pools[randPoolsIndex].pool.Count);
-        while (pools[randPoolsIndex][randPoolIndex].gameObject.activeInHierarchy)
-        {
-            randPoolsIndex = Random.Range(0, pools.Count);
-            randPoolIndex = Random.Range(0, pools[randPoolsIndex].pool.Count);
-        }
+        public List<PoolPiece> Pools => pools;
+        public List<PoolPiece> pools;
+        [HideInInspector] public int[] indices;
+        public string[][] names;
 
-        return pools[randPoolsIndex][randPoolIndex] as T;
-    }
 
-    public void GetChilds()
-    {
-        if (pools.Count > 0)
-            pools.Clear();
-        for (int i = 0; i < transform.childCount; i++)
+        public T GetFromPool<T>(int poolIndex) where T : Component
         {
-            Transform child = transform.GetChild(i);
-            pools.Add(new PoolPiece());
-            for (int j = 0; j < child.childCount; j++)
+            int i = 0;
+            while (pools[poolIndex][i].gameObject.activeInHierarchy)
             {
-                var comps = child.GetChild(j).GetComponents<Component>();
-                for (int k = 0; k < comps.Length; k++)
+                i++;
+                if (i > pools[poolIndex].pool.Count - 1)
                 {
-                    if (comps[k].GetType().Name == names[i][indices[i]])
-                        pools[pools.Count - 1].pool.Add(comps[k]);
+                    var newClone = Instantiate(pools[poolIndex][0], Vector3.zero, Quaternion.identity,
+                        pools[poolIndex][0].transform.parent);
+                    newClone.gameObject.SetActive(false);
+                    pools[poolIndex].pool.Add(newClone);
+                }
+            }
+
+            return pools[poolIndex][i] as T;
+        }
+
+
+        public T GetRandomObject<T>() where T : MonoBehaviour
+        {
+            int randPoolsIndex = Random.Range(0, pools.Count);
+            int randPoolIndex = Random.Range(0, pools[randPoolsIndex].pool.Count);
+            while (pools[randPoolsIndex][randPoolIndex].gameObject.activeInHierarchy)
+            {
+                randPoolsIndex = Random.Range(0, pools.Count);
+                randPoolIndex = Random.Range(0, pools[randPoolsIndex].pool.Count);
+            }
+
+            return pools[randPoolsIndex][randPoolIndex] as T;
+        }
+
+        public void GetChilds()
+        {
+            if (pools.Count > 0)
+                pools.Clear();
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                pools.Add(new PoolPiece());
+                for (int j = 0; j < child.childCount; j++)
+                {
+                    var comps = child.GetChild(j).GetComponents<Component>();
+                    for (int k = 0; k < comps.Length; k++)
+                    {
+                        if (comps[k].GetType().Name == names[i][indices[i]])
+                            pools[pools.Count - 1].pool.Add(comps[k]);
+                    }
                 }
             }
         }
     }
-}
 
 #if UNITY_EDITOR
 
-[CustomEditor(typeof(GenericPool), true)]
-public class GenericPoolEditor : Editor
-{
-    private GenericPool genericPool;
-
-    private void OnEnable()
+    [CustomEditor(typeof(GenericPool), true)]
+    public class GenericPoolEditor : Editor
     {
-        genericPool = target as GenericPool;
+        private GenericPool genericPool;
 
-        genericPool.indices = new int[genericPool.transform.childCount];
-        genericPool.names = new string[genericPool.indices.Length][];
-    }
-
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        for (int i = 0; i < genericPool.transform.childCount; i++)
+        private void OnEnable()
         {
-            Transform child = genericPool.transform.GetChild(i);
-            for (int j = 0; j < child.childCount; j++)
-            {
-                var comps = child.GetChild(j).GetComponents<Component>();
-                genericPool.names[i] = new string[comps.Length];
+            genericPool = target as GenericPool;
 
-                for (int k = 0; k < comps.Length; k++)
+            genericPool.indices = new int[genericPool.transform.childCount];
+            genericPool.names = new string[genericPool.indices.Length][];
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            for (int i = 0; i < genericPool.transform.childCount; i++)
+            {
+                Transform child = genericPool.transform.GetChild(i);
+                for (int j = 0; j < child.childCount; j++)
                 {
-                    genericPool.names[i][k] = comps[k].GetType().Name;
+                    var comps = child.GetChild(j).GetComponents<Component>();
+                    genericPool.names[i] = new string[comps.Length];
+
+                    for (int k = 0; k < comps.Length; k++)
+                    {
+                        genericPool.names[i][k] = comps[k].GetType().Name;
+                    }
                 }
             }
+
+            for (int i = 0; i < genericPool.indices.Length; i++)
+            {
+                if (genericPool.names[i] == null) continue;
+
+                genericPool.indices[i] = EditorGUILayout.Popup(genericPool.indices[i], genericPool.names[i]);
+            }
+
+            if (GUILayout.Button("Get Pools"))
+                genericPool.GetChilds();
         }
-
-        for (int i = 0; i < genericPool.indices.Length; i++)
-        {
-            if (genericPool.names[i] == null) continue;
-
-            genericPool.indices[i] = EditorGUILayout.Popup(genericPool.indices[i], genericPool.names[i]);
-        }
-
-        if (GUILayout.Button("Get Pools"))
-            genericPool.GetChilds();
     }
-}
 #endif
+}

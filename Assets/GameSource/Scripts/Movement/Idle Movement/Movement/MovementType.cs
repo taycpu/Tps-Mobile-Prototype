@@ -1,7 +1,7 @@
-namespace IdleMovement
-{
-    using UnityEngine;
+using UnityEngine;
 
+namespace GameSource.Scripts.Movement.Idle_Movement.Movement
+{
     public abstract class MovementType : MonoBehaviour
     {
         public bool IsMoving => _isMoving;

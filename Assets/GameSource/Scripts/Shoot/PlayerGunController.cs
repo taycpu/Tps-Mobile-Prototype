@@ -1,37 +1,40 @@
-public class PlayerGunController : GunController
+namespace GameSource.Scripts.Shoot
 {
-    private bool onShoot;
-
-    public void ChangeGun(GunAttributes attr)
+    public class PlayerGunController : GunController
     {
-        gunAttributes = attr;
-    }
+        private bool onShoot;
 
-    public new void ShootDirect()
-    {
-        if (gunAttributes.IsAutomatic)
+        public void ChangeGun(GunAttributes attr)
         {
-            onShoot = true;
+            gunAttributes = attr;
         }
-        else
-        {
-            Fire();
-        }
-    }
 
-    private void Update()
-    {
-        if (onShoot)
+        public new void ShootDirect()
         {
-            if (!IsOnCooldown())
+            if (gunAttributes.IsAutomatic)
+            {
+                onShoot = true;
+            }
+            else
             {
                 Fire();
             }
         }
-    }
 
-    public void Release()
-    {
-        onShoot = false;
+        private void Update()
+        {
+            if (onShoot)
+            {
+                if (!IsOnCooldown())
+                {
+                    Fire();
+                }
+            }
+        }
+
+        public void Release()
+        {
+            onShoot = false;
+        }
     }
 }

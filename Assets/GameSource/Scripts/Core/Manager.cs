@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public abstract class Manager : MonoBehaviour
+namespace GameSource.Scripts.Core
 {
-    public virtual void Initialize()
+    public abstract class Manager : MonoBehaviour
     {
+        public virtual void Initialize()
+        {
         
+        }
     }
 }

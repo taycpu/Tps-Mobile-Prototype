@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-
-public class GenericPoolMono : GenericPool
+﻿namespace GameSource.Scripts.Pool
 {
+    public class GenericPoolMono : GenericPool
+    {
+    }
 }

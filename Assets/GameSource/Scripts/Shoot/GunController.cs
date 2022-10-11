@@ -1,31 +1,34 @@
-using System;
-using OpenCover.Framework.Model;
+using GameSource.Scripts.Misc;
+using GameSource.Scripts.Pool;
 using UnityEngine;
 
-public class GunController : MonoBehaviour
+namespace GameSource.Scripts.Shoot
 {
-    [SerializeField] private Transform gunPos;
-    [SerializeField] protected GunAttributes gunAttributes;
-
-    private float lastShootTime;
-
-
-    public void ShootDirect()
+    public class GunController : MonoBehaviour
     {
-        Fire();
-    }
+        [SerializeField] private Transform gunPos;
+        [SerializeField] protected GunAttributes gunAttributes;
 
-    public bool IsOnCooldown()
-    {
-        return Time.time - lastShootTime < gunAttributes.Cooldown;
-    }
+        private float lastShootTime;
 
-    protected void Fire()
-    {
-        lastShootTime = Time.time;
-        Bullet bullet = GenericPoolSingleton.Instance.GetFromPool<Bullet>(0);
-        TWEAKS.PlayParticle(3, gunPos.position + gunPos.forward);
-        bullet.transform.rotation = gunPos.transform.rotation;
-        bullet.Initialize(gunPos, gunAttributes);
+
+        public void ShootDirect()
+        {
+            Fire();
+        }
+
+        public bool IsOnCooldown()
+        {
+            return Time.time - lastShootTime < gunAttributes.Cooldown;
+        }
+
+        protected void Fire()
+        {
+            lastShootTime = Time.time;
+            Bullet bullet = GenericPoolSingleton.Instance.GetFromPool<Bullet>(0);
+            TWEAKS.PlayParticle(3, gunPos.position + gunPos.forward);
+            bullet.transform.rotation = gunPos.transform.rotation;
+            bullet.Initialize(gunPos, gunAttributes);
+        }
     }
 }

@@ -1,38 +1,41 @@
 ﻿using UnityEngine;
 
-public class GenericPoolSingleton : GenericPool
+namespace GameSource.Scripts.Pool
 {
-    private static GenericPoolSingleton instance;
-
-
-    public static GenericPoolSingleton Instance
+    public class GenericPoolSingleton : GenericPool
     {
-        get
+        private static GenericPoolSingleton instance;
+
+
+        public static GenericPoolSingleton Instance
         {
-            if (instance == null)
+            get
             {
-                instance = FindObjectOfType<GenericPoolSingleton>();
                 if (instance == null)
                 {
-                    GameObject go = new GameObject();
-                    instance = go.AddComponent<GenericPoolSingleton>();
-                    go.name = typeof(GenericPoolSingleton).Name;
+                    instance = FindObjectOfType<GenericPoolSingleton>();
+                    if (instance == null)
+                    {
+                        GameObject go = new GameObject();
+                        instance = go.AddComponent<GenericPoolSingleton>();
+                        go.name = typeof(GenericPoolSingleton).Name;
+                    }
                 }
+
+
+                return instance;
             }
-
-
-            return instance;
+            set => instance = value;
         }
-        set => instance = value;
-    }
 
-    public bool dontDestroyOnLoad;
+        public bool dontDestroyOnLoad;
 
-    public void Awake()
-    {
-        if (dontDestroyOnLoad)
+        public void Awake()
         {
-            DontDestroyOnLoad(Instance);
+            if (dontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(Instance);
+            }
         }
     }
 }

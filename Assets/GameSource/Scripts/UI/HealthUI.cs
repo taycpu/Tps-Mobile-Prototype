@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthUI : MonoBehaviour
+namespace GameSource.Scripts.UI
 {
-    [SerializeField] private Image healthBar;
-
-
-    public void FillImage(float amount)
+    public class HealthUI : MonoBehaviour
     {
-        healthBar.fillAmount = amount;
+        [SerializeField] private Image healthBar;
+
+
+        public void FillImage(float amount)
+        {
+            healthBar.fillAmount = amount;
+        }
     }
 }

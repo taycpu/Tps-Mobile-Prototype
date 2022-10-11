@@ -1,11 +1,8 @@
-namespace IdleMovement
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.AI;
+using UnityEngine;
+using UnityEngine.AI;
 
+namespace GameSource.Scripts.Movement.Idle_Movement.Movement
+{
     public class NavmeshMovement : MovementType
     {
         [SerializeField] private NavMeshAgent agent;

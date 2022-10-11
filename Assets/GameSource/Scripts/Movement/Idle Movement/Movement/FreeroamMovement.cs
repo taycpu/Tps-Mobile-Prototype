@@ -1,8 +1,8 @@
-namespace IdleMovement
-{
-    using System;
-    using UnityEngine;
+using GameSource.Scripts.Movement.Idle_Movement.Joystick;
+using UnityEngine;
 
+namespace GameSource.Scripts.Movement.Idle_Movement.Movement
+{
     public enum MovementMethod
     {
         TransformBased,

@@ -1,26 +1,28 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using GameSource.Scripts.Units;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : Manager
+namespace GameSource.Scripts.Core
 {
-    [SerializeField] private List<Manager> managers;
-    [SerializeField] private PlayerUnit playerUnit;
-
-    public override void Initialize()
+    public class GameManager : Manager
     {
-        foreach (var manager in managers)
+        [SerializeField] private List<Manager> managers;
+        [SerializeField] private PlayerUnit playerUnit;
+
+        public override void Initialize()
         {
-            manager.Initialize();
+            foreach (var manager in managers)
+            {
+                manager.Initialize();
+            }
+
+            playerUnit.Initialize();
         }
 
-        playerUnit.Initialize();
-    }
-
-    public void ResetGame()
-    {
-        SceneManager.LoadScene(0);
+        public void ResetGame()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
