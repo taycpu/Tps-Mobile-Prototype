@@ -59,9 +59,7 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
         }
 
         Following(vector);
-
-        if (Directions > 0)
-            vector = DirectionalVector(vector, Directions, SimmetryAngle * Mathf.Deg2Rad);
+        
 
         float clampSize = ClampZone * background.sizeDelta.x * 0.5f;
 
