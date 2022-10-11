@@ -24,7 +24,7 @@ public class GunController : MonoBehaviour
     {
         lastShootTime = Time.time;
         Bullet bullet = GenericPoolSingleton.Instance.GetFromPool<Bullet>(0);
-        // TWEAKS.PlayParticle(3, gunPos.position + gunPos.forward);
+        TWEAKS.PlayParticle(3, gunPos.position + gunPos.forward);
         bullet.transform.rotation = gunPos.transform.rotation;
         bullet.Initialize(gunPos, gunAttributes);
     }

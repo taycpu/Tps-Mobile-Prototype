@@ -9,6 +9,7 @@ public class FieldOfViewEnemy : MonoBehaviour
     public bool canSeePlayer;
 
     public Transform player;
+
     private void Update()
     {
         FieldOfViewCheck();
@@ -46,7 +47,6 @@ public class FieldOfViewEnemy : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player is not in the vision");
             canSeePlayer = false;
         }
     }

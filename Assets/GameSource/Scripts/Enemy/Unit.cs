@@ -17,7 +17,7 @@ public abstract class Unit : MonoBehaviour
     {
         if (!isAvailable) return;
         health -= damage;
-        TWEAKS.PlayParticle(1, transform.position);
+        TWEAKS.PlayParticle(4, transform.position);
         healthUI.FillImage((float)health / (float)unitAttributes.Health);
         //Particles,Anims
         if (health <= 0)
@@ -27,7 +27,7 @@ public abstract class Unit : MonoBehaviour
     protected virtual void Die()
     {
         isAvailable = false;
-        TWEAKS.PlayParticle(0, transform.position);
+        TWEAKS.PlayParticle(5, transform.position);
         gameObject.SetActive(false);
     }
 }
