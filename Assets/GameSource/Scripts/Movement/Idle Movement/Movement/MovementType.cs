@@ -15,5 +15,6 @@ namespace IdleMovement
 
         public abstract void Stop();
         public abstract void Continue();
+        public abstract void SetSpeed(float val);
     }
 }

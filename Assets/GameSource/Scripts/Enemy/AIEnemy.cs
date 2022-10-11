@@ -15,6 +15,7 @@ public abstract class AIEnemy : Unit
         transform.position = pointController.GetNewTarget(id).point.position;
         gameObject.SetActive(true);
         SetNewDestination();
+        agent.speed = unitAttributes.Speed;
     }
 
     protected void Patrol()

@@ -8,6 +8,7 @@ public class GunController : MonoBehaviour
     private float lastShootTime;
 
 
+    
     public void ShootDirect()
     {
         Fire();

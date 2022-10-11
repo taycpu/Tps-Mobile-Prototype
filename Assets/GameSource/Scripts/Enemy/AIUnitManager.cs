@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public class AIUnitController : MonoBehaviour
+public class AIUnitManager : Manager
 {
     private const int c_soldierEnemyPoolIndex = 1;
     private const int c_patrolEnemyPoolIndex = 2;
 
-    private void Awake()
+    public override void Initialize()
     {
         GetFromPool(5);
     }
+
 
     private void GetFromPool(int amount)
     {

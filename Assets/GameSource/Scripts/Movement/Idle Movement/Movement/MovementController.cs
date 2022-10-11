@@ -13,7 +13,7 @@ namespace IdleMovement
     {
         public MovementType movement;
 
-        public  void Initialize()
+        public void Initialize()
         {
             movement.Initialize();
         }
@@ -26,6 +26,11 @@ namespace IdleMovement
         public void ContinueMovement()
         {
             movement.Continue();
+        }
+
+        public void SetSpeed(float val)
+        {
+            movement.SetSpeed(val);
         }
     }
 

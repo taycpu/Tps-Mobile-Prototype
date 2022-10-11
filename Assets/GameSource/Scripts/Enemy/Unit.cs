@@ -2,11 +2,13 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
-    public int health;
     public bool isAvailable;
+    [SerializeField] protected UnitAttributes unitAttributes;
+    private int health;
 
     public virtual void Initialize()
     {
+        health = unitAttributes.Health;
         isAvailable = true;
     }
 

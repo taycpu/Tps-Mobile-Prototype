@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    public bool isDynamic;
     private const float SimmetryAngle = 90f;
     private const float DeadZone = 0.2f;
     private const float ClampZone = 1f;
@@ -22,16 +23,25 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
     {
         IsWorking = false;
         Output = Vector2.zero;
-        background.anchoredPosition = Vector2.zero;
+        if (isDynamic)
+        {
+            background.gameObject.SetActive(false);
+            background.anchoredPosition = Vector2.zero;
+        }
+
         handle.anchoredPosition = Vector2.zero;
         originalPosition = background.anchoredPosition;
-        background.gameObject.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        background.gameObject.SetActive(true);
-        background.position = eventData.position;
+        if (isDynamic)
+        {
+            background.gameObject.SetActive(true);
+
+            background.position = eventData.position;
+        }
+
         handle.anchoredPosition = Vector2.zero;
     }
 
@@ -44,7 +54,7 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
     {
         PointerEventData eventData = baseEventData as PointerEventData;
 
-        Vector2 vector = eventData.position - (Vector2) background.position;
+        Vector2 vector = eventData.position - (Vector2)background.position;
 
         float magnitude = vector.magnitude;
 
@@ -59,7 +69,7 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
         }
 
         Following(vector);
-        
+
 
         float clampSize = ClampZone * background.sizeDelta.x * 0.5f;
 
@@ -91,7 +101,8 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
     public void OnPointerUp(PointerEventData eventData)
     {
         OnBackgroundPointerUp(eventData);
-        background.gameObject.SetActive(false);
+        if (isDynamic)
+            background.gameObject.SetActive(false);
     }
 
     private Vector2 DirectionalVector(Vector2 vector, int directions, float simmetryAngle)
@@ -102,7 +113,7 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
         angle /= 180f / directions;
 
         angle = (angle >= 0f) ? Mathf.Floor(angle) : Mathf.Ceil(angle);
-        if ((int) Mathf.Abs(angle) % 2 == 1)
+        if ((int)Mathf.Abs(angle) % 2 == 1)
         {
             if (angle >= 0f)
             {
@@ -138,7 +149,8 @@ public class JoystickScript : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
             float yMax = rectTransform.sizeDelta.y * 0.5f;
             newPos.y = Mathf.Clamp(newPos.y, -yMax, yMax);
 
-            background.anchoredPosition = newPos;
+            if (isDynamic)
+                background.anchoredPosition = newPos;
         }
     }
 }

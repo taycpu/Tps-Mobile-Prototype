@@ -163,10 +163,16 @@ namespace IdleMovement
             _canMove = true;
         }
 
+        public override void SetSpeed(float val)
+        {
+            speed = val;
+        }
+
         private void Reset()
         {
             if (FindObjectOfType<JoystickScript>() != null)
                 joystick = FindObjectOfType<JoystickScript>();
+            relativeObject = Camera.main.transform;
             if (rb == null)
             {
                 if (gameObject.GetComponent<Rigidbody>() != null)

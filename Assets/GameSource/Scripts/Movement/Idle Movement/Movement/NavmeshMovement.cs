@@ -51,5 +51,10 @@ namespace IdleMovement
         {
             agent.isStopped = false;
         }
+
+        public override void SetSpeed(float val)
+        {
+            agent.speed = val;
+        }
     }
 }

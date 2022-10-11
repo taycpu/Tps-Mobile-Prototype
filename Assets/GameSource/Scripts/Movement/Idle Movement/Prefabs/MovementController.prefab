@@ -92,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13ec266d7b0942645aeb138d8a391ca4, type: 2}
+  - {fileID: 2100000, guid: 1f0a0701d375e4548bf6a94f8c40d3f2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +177,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1fd0215883b0084ea23618c2ed27cc6, type: 2}
+  - {fileID: 2100000, guid: 0955eb8a05d0040cd8e481eaee372c9a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -346,9 +346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb9c0e07229482d83f375dc17f5d94a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   isAvailable: 0
+  unitAttributes: {fileID: 11400000, guid: c9a45e458c3a245c3a33faf4b05ba5d3, type: 2}
   gunController: {fileID: 767870777}
+  movementController: {fileID: 5824441531626671167}
 --- !u!114 &767870777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,4 +363,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunPos: {fileID: 1038975992}
-  bulletForce: 5
+  gunAttributes: {fileID: 11400000, guid: f8574eeb1c4dc45b0be2d224174190c7, type: 2}
